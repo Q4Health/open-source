@@ -8873,9 +8873,8 @@ $.widget("ui.dialog", {
 			uiDialogTitle = $('<span></span>')
 				.addClass('ui-dialog-title')
 				.attr('id', titleId)
-				.html(title)
 				.prependTo(uiDialogTitlebar);
-
+			this._title( uiDialogTitle );
 		//handling of deprecated beforeclose (vs beforeClose) option
 		//Ticket #4669 http://dev.jqueryui.com/ticket/4669
 		//TODO: remove in 1.9pre
@@ -8899,7 +8898,12 @@ $.widget("ui.dialog", {
 			uiDialog.bgiframe();
 		}
 	},
-
+       _title: function( title ) {
+ 		if ( !this.options.title ) {
+ 			title.html( "&#160;" );
+ 		}
+ 		title.text( this.options.title );
+ 	},
 	_init: function() {
 		if ( this.options.autoOpen ) {
 			this.open();
